@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GG GEAR - Light Up Your Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes rgbGlow {
+            0% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
+            33% { border-color: #00ff00; box-shadow: 0 0 15px rgba(0,255,0,0.5); }
+            66% { border-color: #0000ff; box-shadow: 0 0 15px rgba(0,0,255,0.5); }
+            100% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.5); }
+        }
+        .rgb-card {
+            border: 2px solid #ff0000;
+            animation: rgbGlow 6s infinite;
+        }
+        .rgb-text {
+            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300%;
+            animation: rgbTextAnim 4s linear infinite;
+        }
+        @keyframes rgbTextAnim {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-white font-sans min-h-screen pb-24">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#0b0f19]/90 backdrop-blur-md border-b border-gray-800 px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 p-0.5 flex items-center justify-center overflow-hidden">
+                <span class="font-bold text-xs rgb-text">GG</span>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg rgb-text">GG GEAR</h1>
+                <p class="text-[10px] text-gray-400">Light Up Your Game</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="openAdmin()" class="bg-gray-800 hover:bg-gray-700 text-xs px-3 py-1.5 rounded-lg border border-gray-700">⚙️ ຈັດການສິນຄ້າ</button>
+            <button onclick="toggleCart()" class="bg-gradient-to-r from-red-600 to-pink-600 px-4 py-1.5 rounded-full text-sm font-bold flex items-center gap-1.5 shadow-lg">
+                🛒 <span>ຕະກ່າ</span> <span id="cart-count" class="bg-white text-black px-1.5 py-0.2 rounded-full text-xs">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto p-4">
+        <!-- Banner Store Info -->
+        <div class="bg-gray-900 border border-gray-800 p-4 rounded-2xl mb-6 rgb-card text-center">
+            <h2 class="font-bold text-md mb-1 rgb-text">GG GEAR - ຮ້ານຂາຍອຸປະກອນເກມມິງ</h2>
+            <p class="text-xs text-gray-400 mb-3">ຄີບອດ Mechanical, Keycap ແລະ ອຸປະກອນຕົກແຕ່ງໂຕະຄົບວົງຈອນ</p>
+            <div class="flex justify-center gap-2">
+                <span class="text-[10px] bg-red-900/50 text-red-300 px-2 py-0.5 rounded border border-red-800">🟢 Hall Effect</span>
+                <span class="text-[10px] bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded border border-blue-800">🔵 Custom Keyboard</span>
+                <span class="text-[10px] bg-yellow-900/50 text-yellow-300 px-2 py-0.5 rounded border border-yellow-800">🟡 Gaming Mouse</span>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <h3 class="font-bold text-sm mb-3 text-gray-300">ສິນຄ້າທັງໝົດ</h3>
+        <div id="product-grid" class="grid grid-cols-2 gap-3">
+            <!-- Products injected by JS -->
+        </div>
+
+        <!-- Contact Section -->
+        <div class="mt-8 bg-gray-900 border border-gray-800 rounded-2xl p-4 rgb-card">
+            <h3 class="font-bold text-sm mb-3 text-center rgb-text">📞 ຕິດສໍ່າ ແລະ ຕິດຕາມຮ້ານເຮົາ</h3>
+            <div class="grid grid-cols-3 gap-2">
+                <a href="https://www.facebook.com/share/1ACd8zfq6T/?mibextid=wwXIfr" target="_blank" class="bg-blue-600/20 hover:bg-blue-600/40 border border-blue-600/50 p-2.5 rounded-xl text-center flex flex-col items-center justify-center transition">
+                    <span class="text-xl mb-1">📘</span>
+                    <span class="text-[11px] font-bold text-blue-400">Facebook</span>
+                </a>
+                <a href="http://wa.me/8562077638351" target="_blank" class="bg-green-600/20 hover:bg-green-600/40 border border-green-600/50 p-2.5 rounded-xl text-center flex flex-col items-center justify-center transition">
+                    <span class="text-xl mb-1">💚</span>
+                    <span class="text-[11px] font-bold text-green-400">WhatsApp</span>
+                </a>
+                <a href="https://www.tiktok.com/@gggearrr?_r=1&_t=ZS-9A3bLNouuzi" target="_blank" class="bg-pink-600/20 hover:bg-pink-600/40 border border-pink-600/50 p-2.5 rounded-xl text-center flex flex-col items-center justify-center transition">
+                    <span class="text-xl mb-1">🎵</span>
+                    <span class="text-[11px] font-bold text-pink-400">TikTok</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-sm rounded-2xl p-4 relative rgb-card">
+            <button onclick="closeDetail()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-lg bg-gray-800 w-7 h-7 rounded-full flex items-center justify-center">✕</button>
+            <div id="detail-content" class="space-y-3">
+                <!-- Detail injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-gray-900 border-l border-gray-800 p-4 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="flex justify-between items-center border-b border-gray-800 pb-3 mb-4">
+            <h2 class="font-bold text-lg">ຕະກ່າສິນຄ້າຂອງທ່ານ</h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl">✕</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto space-y-3">
+            <p class="text-gray-500 text-center py-10">ກະຕ່າວ່າງຢູ່, ເລືອກເອົາສິນຄ້າທີ່ມັກໄດ້ເລີຍ</p>
+        </div>
+        <div class="border-t border-gray-800 pt-3 mt-3">
+            <div class="flex justify-between font-bold text-md mb-3">
+                <span>ຍອດລວມ:</span>
+                <span id="cart-total" class="text-pink-500">0 ກີບ</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-500 py-2.5 rounded-xl font-bold text-center">ສັ່ງຊື້ຜ່ານ WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 w-full max-w-md rounded-2xl p-4 max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-sm">⚙️ ຈັດການສິນຄ້າ ແລະ ລາຄາ</h3>
+                <button onclick="openAdmin()" class="text-gray-400">✕</button>
+            </div>
+            <div class="flex justify-between mb-3">
+                <button onclick="addNewProduct()" class="bg-blue-600 hover:bg-blue-500 text-xs px-3 py-1.5 rounded-lg">+ ເພີ່ມສິນຄ້າ</button>
+                <button onclick="resetProducts()" class="bg-gray-800 hover:bg-gray-700 text-xs px-3 py-1.5 rounded-lg">ຄືນຄ່າເລີ່ມຕົ້ນ</button>
+            </div>
+            <div id="admin-product-list" class="flex-1 overflow-y-auto space-y-3 pr-1"></div>
+            <div class="border-t border-gray-800 pt-3 mt-3 flex justify-end gap-2">
+                <button onclick="openAdmin()" class="bg-gray-800 px-4 py-1.5 rounded-lg text-xs">ປິດ</button>
+                <button onclick="saveAdminChanges()" class="bg-green-600 px-4 py-1.5 rounded-lg text-xs font-bold">ບັນທຶກການປ່ຽນແປງ</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let defaultProducts = [
+            { id: 1, name: "AULA WIN68 HE - ຮັບປະກັນ Hall Effect", price: 759000, badge: "ພ້ອມສົ່ງ", category: "ແປ້ນພິມ", image: "", desc: "ຄີບອດສະໄຕລ໌ເກມມິງ ຕອບສະໜອງໄວດ້ວຍ Hall Effect Magnetic Switches ປັບແຕ່ງສີໄຟ RGB ได้ຢ່າງอิสระ" },
+            { id: 2, name: "Gravastar K1 Pro Edition (Gradient)", price: 2398000, badge: "Pre-Order", category: "ແປ້ນພິມ", image: "", desc: "ດີໄຊລຳໂພງ/ຄີບອດແບບຫຸ່ນຍົນອະນາຄົດ ວັດສະດຸໂລຫະພຣີມຽມ ສີ Gradient ງາມໂດດເດັ່ນ" },
+            { id: 3, name: "AULA WIN60 HE ມິນິເມກາຣິກ", price: 560000, badge: "Pre-Order", category: "ແປ້ນພິມ", image: "", desc: "ຂະໜາດກະທັດຮັດ 60% ພົກພາງ່າຍ ສາຍເກມມິງ FPS ຕ້ອງມີ" },
+            { id: 4, name: "AULA Wolf Spider S35 - ສີຂາວ", price: 235000, badge: "ພ້ອມສົ່ງ", category: "ເມົ້າ", image: "", desc: "ເມົ້າເກມມິງ ergonomic ໄຟ RGB ງາມໆ ຕັ້ງຄ່າ DPI ໄດ້" }
+        ];
+
+        let products = JSON.parse(localStorage.getItem('gg_gear_products')) || defaultProducts;
+        let cart = {};
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            products.forEach(p => {
+                let qty = cart[p.id] || 0;
+                let imgContent = p.image ? `<img src="${p.image}" class="w-full h-full object-cover rounded-lg">` : `<span class="text-xs text-gray-500">⌨️ ${p.category}</span>`;
+                
+                grid.innerHTML += `
+                    <div class="bg-gray-900/90 border border-gray-800 rounded-xl p-3 flex flex-col justify-between rgb-card">
+                        <div class="cursor-pointer" onclick="openDetail(${p.id})">
+                            <div class="relative bg-black/40 h-28 rounded-lg mb-2 flex items-center justify-center overflow-hidden">
+                                <span class="absolute top-1 left-1 z-10 bg-red-600/85 text-white text-[9px] px-1.5 py-0.5 rounded">${p.badge}</span>
+                                ${imgContent}
+                            </div>
+                            <h4 class="font-medium text-xs mb-1 line-clamp-2 hover:text-pink-400 transition">${p.name}</h4>
+                            <p class="text-pink-400 font-bold text-xs mb-3">${p.price.toLocaleString()} ກີບ</p>
+                        </div>
+                        <div>
+                            ${qty === 0 ? 
+                                `<button onclick="updateQty(${p.id}, 1)" class="w-full bg-gray-800 hover:bg-gray-700 text-xs py-1.5 rounded-lg border border-gray-700 font-bold">🛒 ສັ່ງຊື້</button>` :
+                                `<div class="flex items-center justify-between bg-gray-800 rounded-lg p-1">
+                                    <button onclick="updateQty(${p.id}, -1)" class="w-7 h-7 bg-gray-700 rounded text-center font-bold">-</button>
+                                    <span class="text-xs font-bold">${qty}</span>
+                                    <button onclick="updateQty(${p.id}, 1)" class="w-7 h-7 bg-gray-700 rounded text-center font-bold">+</button>
+                                 </div>`
+                            }
+                        </div>
+                    </div>
+                `;
+            });
+            updateCartUI();
+        }
+
+        function openDetail(id) {
+            let p = products.find(item => item.id == id);
+            if (!p) return;
+            let imgContent = p.image ? `<img src="${p.image}" class="w-full h-full object-cover rounded-xl">` : `<span class="text-sm text-gray-500">⌨️ ບໍ່ມີຮູບພາບ</span>`;
+            
+            document.getElementById('detail-content').innerHTML = `
+                <div class="relative bg-black/40 h-48 rounded-xl flex items-center justify-center overflow-hidden mb-3 border border-gray-800">
+                    <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded">${p.badge}</span>
+                    ${imgContent}
+                </div>
+                <span class="text-[10px] bg-gray-800 text-pink-400 px-2 py-0.5 rounded">${p.category}</span>
+                <h3 class="font-bold text-base mt-1">${p.name}</h3>
+                <p class="text-pink-500 font-bold text-lg">${p.price.toLocaleString()} ກີບ</p>
+                <p class="text-xs text-gray-300 bg-black/30 p-2.5 rounded-lg border border-gray-800 leading-relaxed">${p.desc || 'ບໍ່ມີລາຍລະອຽດເພີ່ມເຕີມ'}</p>
+                <button onclick="updateQty(${p.id}, 1); closeDetail(); toggleCart();" class="w-full bg-gradient-to-r from-red-600 to-pink-600 py-2.5 rounded-xl font-bold text-xs shadow-lg mt-2">ເພີ່ມເຂົ້າຕະກ່າສັ່ງຊື້</button>
+            `;
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        function updateQty(id, change) {
+            cart[id] = (cart[id] || 0) + change;
+            if (cart[id] <= 0) delete cart[id];
+            renderProducts();
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('translate-x-full');
+        }
+
+        function updateCartUI() {
+            let totalCount = 0;
+            let totalPrice = 0;
+            let cartItemsEl = document.getElementById('cart-items');
+            cartItemsEl.innerHTML = '';
+
+            let hasItems = false;
+            for (let id in cart) {
+                hasItems = true;
+                let p = products.find(item => item.id == id);
+                let qty = cart[id];
+                totalCount += qty;
+                totalPrice += p.price * qty;
+
+                cartItemsEl.innerHTML += `
+                    <div class="flex justify-between items-center bg-gray-800/50 p-2 rounded-lg text-xs">
+                        <div>
+                            <p class="font-medium">${p.name}</p>
+                            <p class="text-pink-400">${p.price.toLocaleString()} ກີບ x ${qty}</p>
+                        </div>
+                        <div class="flex items-center gap-1">
+                            <button onclick="updateQty(${p.id}, -1)" class="px-2 bg-gray-700 rounded">-</button>
+                            <span>${qty}</span>
+                            <button onclick="updateQty(${p.id}, 1)" class="px-2 bg-gray-700 rounded">+</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (!hasItems) {
+                cartItemsEl.innerHTML = `<p class="text-gray-500 text-center py-10">ກະຕ່າວ່າງຢູ່, ເລືອກເອົາສິນຄ້າທີ່ມັກໄດ້ເລີຍ</p>`;
+            }
+
+            document.getElementById('cart-count').innerText = totalCount;
+            document.getElementById('cart-total').innerText = totalPrice.toLocaleString() + ' ກີບ';
+        }
+
+        function openAdmin() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) renderAdminList();
+        }
+
+        function renderAdminList() {
+            const list = document.getElementById('admin-product-list');
+            list.innerHTML = '';
+            products.forEach((p, idx) => {
+                list.innerHTML += `
+                    <div class="bg-black/40 border border-gray-800 p-2.5 rounded-xl space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-400">ສິນຄ້າ #${idx + 1}</span>
+                            <button onclick="deleteProduct(${p.id})" class="text-red-500 hover:text-red-400 text-xs font-bold bg-red-950/40 px-2 py-0.5 rounded border border-red-900">🗑️ ລົບ</button>
+                        </div>
+                        <input type="text" id="adm-name-${p.id}" value="${p.name}" class="w-full bg-gray-800 border border-gray-700 text-xs p-1.5 rounded" placeholder="ຊື່ສິນຄ້າ">
+                        <div class="flex gap-2">
+                            <div class="flex-1">
+                                <label class="text-[10px] text-gray-400">ລາຄາ (ກີບ):</label>
+                                <input type="number" id="adm-price-${p.id}" value="${p.price}" class="w-full bg-gray-800 border border-gray-700 text-xs p-1.5 rounded">
+                            </div>
+                            <div class="w-28">
+                                <label class="text-[10px] text-gray-400">ປ້າຍ:</label>
+                                <input type="text" id="adm-badge-${p.id}" value="${p.badge}" class="w-full bg-gray-800 border border-gray-700 text-xs p-1.5 rounded">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-gray-400">ລິ້ງຮູບພາບ (URL):</label>
+                            <input type="text" id="adm-img-${p.id}" value="${p.image || ''}" class="w-full bg-gray-800 border border-gray-700 text-xs p-1.5 rounded mb-1" placeholder="https://...">
+                            <input type="file" accept="image/*" onchange="handleImageUpload(event, ${p.id})" class="text-[10px] text-gray-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-[10px] file:font-semibold file:bg-gray-700 file:text-white hover:file:bg-gray-600">
+                        </div>
+                        <div>
+                            <label class="text-[10px] text-gray-400">ລາຍລະອຽດເພີ່ມເຕີມ:</label>
+                            <textarea id="adm-desc-${p.id}" class="w-full bg-gray-800 border border-gray-700 text-xs p-1.5 rounded" rows="2">${p.desc || ''}</textarea>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function handleImageUpload(event, id) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(`adm-img-${id}`).value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addNewProduct() {
+            let newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+            products.push({ id: newId, name: "ສິນຄ້າໃໝ່", price: 100000, badge: "ພ້ອມສົ່ງ", category: "ແປ້ນພິມ", image: "", desc: "ລາຍລະອຽດສິນຄ້າ..." });
+            renderAdminList();
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            delete cart[id];
+            renderAdminList();
+        }
+
+        function saveAdminChanges() {
+            products.forEach(p => {
+                let nameInput = document.getElementById(`adm-name-${p.id}`);
+                let priceInput = document.getElementById(`adm-price-${p.id}`);
+                let badgeInput = document.getElementById(`adm-badge-${p.id}`);
+                let imgInput = document.getElementById(`adm-img-${p.id}`);
+                let descInput = document.getElementById(`adm-desc-${p.id}`);
+                if (nameInput) p.name = nameInput.value;
+                if (priceInput) p.price = Number(priceInput.value);
+                if (badgeInput) p.badge = badgeInput.value;
+                if (imgInput) p.image = imgInput.value;
+                if (descInput) p.desc = descInput.value;
+            });
+            localStorage.setItem('gg_gear_products', JSON.stringify(products));
+            openAdmin();
+            renderProducts();
+            alert("ບັນທຶກຂໍ້ມູນສຳເລັດ!");
+        }
+
+        function resetProducts() {
+            if(confirm("ຕ້ອງການຣີເຊັດເປັນຄ່າເລີ່ມຕົ້ນບໍ?")) {
+                products = JSON.parse(JSON.stringify(defaultProducts));
+                localStorage.removeItem('gg_gear_products');
+                renderAdminList();
+                renderProducts();
+            }
+        }
+
+        function checkoutWhatsApp() {
+            let text = "ສະບາຍດີ, ຕ້ອງການສັ່ງຊື້ສິນຄ້າ:%0A";
+            let totalPrice = 0;
+            for (let id in cart) {
+                let p = products.find(item => item.id == id);
+                let qty = cart[id];
+                text += `- ${p.name} x ${qty} (${(p.price * qty).toLocaleString()} ກີບ)%0A`;
+                totalPrice += p.price * qty;
+            }
+            text += `%0Aຍອດລວມທັງໝົດ: ${totalPrice.toLocaleString()} ກີບ`;
+            window.open(`https://wa.me/8562077638351?text=${text}`, '_blank');
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
